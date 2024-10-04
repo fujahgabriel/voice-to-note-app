@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const filePath = `public/assets/${(file as File).name}`;
+    const filePath = `./assets/${(file as File).name}`;
     
     const audioFile = await writeFile(
         path.join(process.cwd(), filePath),

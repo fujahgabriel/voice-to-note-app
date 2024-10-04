@@ -18,10 +18,10 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    console.log((file as File).type)
-    
-    const audioFile = new File([file], (file as File).name, { type: 'audio/webm' });
-   
+    console.log(`FileType: ${(file as File).type}`)
+
+    const audioFile = new File([file], (file as File).name, { type: (file as File).type });
+   console.log(audioFile)
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,
       model: 'whisper-1',

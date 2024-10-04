@@ -18,9 +18,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    console.log(`FileType: ${(file as File).type}`)
+    const fileType = (file as File).type;
+    console.log(`FileType: ${fileType}`);
+    const cleanedFileType = fileType?.split(';')[0] || fileType;
+    const fileExtension = cleanedFileType.replace("audio/", ".");
 
-    const audioFile = new File([file], (file as File).name, { type: (file as File).type });
+    const newName = (file as File).name + fileExtension;
+    const audioFile = new File([file], newName, {  type: (file as File).type });
+    console.log(newName)
    console.log(audioFile)
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,

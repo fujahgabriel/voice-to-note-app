@@ -97,7 +97,8 @@ export default function Home() {
 
     setIsLoading(true)
     const formData = new FormData()
-    formData.append('file', audioBlob, 'audio.webm')
+    const fileName = `audio-${Date.now()}`
+    formData.append('file', audioBlob, fileName)
 
     try {
       const response = await fetch('/api/transcribe', {

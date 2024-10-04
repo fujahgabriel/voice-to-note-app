@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const filePath = `assets/${(file as File).name}`;
+    const filePath = `/.netlify/blobs/deploy/${(file as File).name}`;
     
     const audioFile = await writeFile(
         path.join(process.cwd(), filePath),

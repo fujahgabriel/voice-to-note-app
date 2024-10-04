@@ -24,9 +24,9 @@ export async function POST(request: NextRequest) {
     const fileExtension = cleanedFileType.replace("audio/", ".");
 
     const newName = (file as File).name + fileExtension;
-    const audioFile = new File([file], newName, {  type: (file as File).type });
+    const audioFile = new File([file], newName, { type: (file as File).type });
     console.log(newName)
-   console.log(audioFile)
+    console.log(audioFile)
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,
       model: 'whisper-1',

@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
     note: "Summarize the following text as a concise note:",
     tweet: "Condense the following text into a tweet (280 characters max):",
     todo: "Extract action items from the following text and create a well detailed to-do list:",
+    quiz: "Create a quiz from the following text:",
   }
 
   const prompt = `${promptMap[format as keyof typeof promptMap]} "${text}"; output in markdown, Properly formatted and styled with headings, paragraphs, lists, and other elements.`

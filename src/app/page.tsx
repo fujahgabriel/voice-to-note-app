@@ -227,7 +227,6 @@ export default function Home() {
               <textarea
                 className="w-full h-32 p-2 border border-slate-800 dark:text-gray-200 bg-transparent overflow-y-scroll rounded resize-none"
                 value={transcription}
-                readOnly
               />
             )}
           </div>
@@ -246,6 +245,7 @@ export default function Home() {
                   <option value="note">Note</option>
                   <option value="tweet">Tweet</option>
                   <option value="todo">To-Do List</option>
+                  <option value="quiz">Quiz</option>
                 </select>
                 <button
                   onClick={() => handleConvert('journal')}

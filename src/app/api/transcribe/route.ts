@@ -10,7 +10,7 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
-  
+
   const file = formData.get('file') as Blob | null
 
   if (!file) {
@@ -18,23 +18,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    
-    const buffer = Buffer.from(await file.arrayBuffer());
 
-    const filePath = `/.netlify/blobs/deploy/${(file as File).name}`;
-    
-    const audioFile = await writeFile(
-        path.join(process.cwd(), filePath),
-        buffer
-      );
-  
-
-   const transcription = await openai.audio.transcriptions.create({
-      file: fs.createReadStream(path.join(process.cwd(), filePath)),
+    const audioFile = new File([file], (file as File).name, { type: (file as File).type });
+    const transcription = await openai.audio.transcriptions.create({
+      file: audioFile,
       model: 'whisper-1',
     })
 
-    return NextResponse.json({ text: transcription.text }) 
+    return NextResponse.json({ text: transcription.text })
   } catch (error) {
     console.error('OpenAI API error:', error)
     return NextResponse.json({ error: 'Transcription failed' }, { status: 500 })
